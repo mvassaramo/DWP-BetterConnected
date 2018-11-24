@@ -11,7 +11,7 @@ import EventsContainer from './containers/EventsContainer'
 import TalkContainer from './containers/TalkContainer'
 import HelpContainer from './containers/HelpContainer'
 
-import { results }  from './data'
+import { events }  from './data'
 
 // const MeetupAPI = 'https://api.meetup.com/2/cities'
 
@@ -27,7 +27,7 @@ class App extends Component {
   //   .then(results => this.setState({ }))
   // }
 
-  getEvents = () => this.setState({ events: results })
+  getEvents = () => this.setState({ events: events })
 
   componentDidMount() {
     this.getEvents()
@@ -43,9 +43,10 @@ class App extends Component {
           <Route exact path='/About' render={props => <About {...props} />} />
           <Route exact path='/signup' render={props => <SignupForm {...props} />} />
           <Route exact path='/talk' render={props => <TalkContainer {...props} />} />
-          <Route exact path='/events' render={props => <EventsContainer {...props} />} />
+          <Route exact path='/events' render={props => <EventsContainer {...props} events={this.state.events}/>} />
           <Route exact path='/help' render={props => <HelpContainer {...props} />} />
-        </div>
+
+    </div>
 
         <Route exact path='/' render={props => <HomePage {...props} />} />
 

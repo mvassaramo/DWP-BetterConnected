@@ -5,7 +5,14 @@ export default class HelpContainer extends React.Component {
 
   render() {
     return(
-      <h3>What type of help do you require?</h3>
+      <React.Fragment><br></br>
+        <section className="container">
+          <div className="float-center">
+            <h1>What type of help do you require?</h1>
+
+          </div>
+        </section>
+      </React.Fragment>
     )
   }
 

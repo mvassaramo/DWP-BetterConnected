@@ -1,27 +1,56 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import { Route, Link } from 'react-router-dom'
+
+import Header from './components/Header'
+import HomePage from './HomePage'
+import About from './components/About'
+import SignupForm from './components/SignupForm'
+import EventsContainer from './containers/EventsContainer'
+import TalkContainer from './containers/TalkContainer'
+import HelpContainer from './containers/HelpContainer'
+
+import { results }  from './data'
+
+// const MeetupAPI = 'https://api.meetup.com/2/cities'
 
 class App extends Component {
+
+  state = {
+    events: []
+  }
+
+  // getEvents = () => {
+  //   return fetch(MeetupAPI)
+  //   .then(resp => resp.json())
+  //   .then(results => this.setState({ }))
+  // }
+
+  getEvents = () => this.setState({ events: results })
+
+  componentDidMount() {
+    this.getEvents()
+  }
+
   render() {
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+      <React.Fragment>
+        <Header />
+
+        <div>
+          <Route exact path='/About' render={props => <About {...props} />} />
+          <Route exact path='/signup' render={props => <SignupForm {...props} />} />
+          <Route exact path='/talk' render={props => <TalkContainer {...props} />} />
+          <Route exact path='/events' render={props => <EventsContainer {...props} />} />
+          <Route exact path='/help' render={props => <HelpContainer {...props} />} />
+        </div>
+
+        <Route exact path='/' render={props => <HomePage {...props} />} />
+
+      </React.Fragment>
+    )
   }
 }
 
